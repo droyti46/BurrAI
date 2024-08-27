@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://buao0p8ivuefo"]
+
+[ext_resource type="Script" path="res://src/assets/ui/next_button/next_button.gd" id="1_7whha"]
+[ext_resource type="Texture2D" uid="uid://v3x2w24hy25x" path="res://src/assets/ui/next_button/next_button.png" id="1_m5c2d"]
+[ext_resource type="FontFile" uid="uid://bm4ha2f1qwsdw" path="res://src/assets/fonts/title_font.ttf" id="3_bwpon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfuo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w228w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2i2dg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lh21l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ihths"]
+
+[sub_resource type="Animation" id="Animation_eieyf"]
+resource_name = "click"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonTexture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.707107, 1.51572, 0.517632),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ButtonText:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.757858, 1.8025, 0.574349),
+"update": 0,
+"values": [41, 37, 41]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqgaf"]
+_data = {
+"click": SubResource("Animation_eieyf")
+}
+
+[node name="NextButton" type="Button"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 125.0
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wfuo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_w228w")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2i2dg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lh21l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ihths")
+script = ExtResource("1_7whha")
+
+[node name="ButtonTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(350, 62.5)
+mouse_filter = 2
+texture = ExtResource("1_m5c2d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonText" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bwpon")
+theme_override_font_sizes/font_size = 41
+text = "пример текста"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uqgaf")
+}
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
